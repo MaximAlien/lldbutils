@@ -8,10 +8,14 @@
 
 @import Foundation;
 
+#import "TestClass.h"
+
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        // to give user the ability to pause program execution 
+        // to give user the ability to pause program execution
         sleep(10);
+        
+        // [TestClass handleFirstname:@"John" lastname:@"Doe"];
     }
     return 0;
 }

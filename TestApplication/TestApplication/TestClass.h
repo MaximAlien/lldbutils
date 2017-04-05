@@ -10,4 +10,7 @@
 
 @interface TestClass : NSObject
 
++ (void)handleFirstname:(NSString *)firstname
+               lastname:(NSString *)lastname;
+
 @end

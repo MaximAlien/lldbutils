@@ -10,4 +10,9 @@
 
 @implementation TestClass
 
++ (void)handleFirstname:(NSString *)firstname
+               lastname:(NSString *)lastname {
+    NSLog(@"[%s]: Firstname: %@, Lastname: %@", __FUNCTION__, firstname, lastname);
+}
+
 @end
