@@ -38,7 +38,13 @@ def insert_data(debugger, command, result, dict):
         print 'Lastname is: ' + lastname
 
     # fill in fields with firstname and lastname
-    cmd = 'expr (void) [TestClass handleFirstname:' + '@"' + firstname + '"' + ' lastname:' '@"' + lastname + '"' + ']'
+    
+    # Objective-C expression
+    cmd = 'expr (void) [TestClass handleFirstname:@"' + firstname + '"' + ' lastname:@"' + lastname + '"]'
+    
+    # C++/JNI expression
+    # cmd = 'expr (void) TestClass::handleName' + '(' + '"' + firstname + '",' + '"' + lastname + '"' + ')'
+    
     print cmd
 
     res = lldb.SBCommandReturnObject()
@@ -46,9 +52,9 @@ def insert_data(debugger, command, result, dict):
 
     # handle error if any
     if not res.Succeeded():
-	   print 'Error: Cannot execute command.'
-	   print res
-	   return
+        print 'Error: Cannot execute command.'
+        print res
+        return
 
     # continue process execution
     target = lldb.debugger.GetSelectedTarget()
@@ -61,4 +67,4 @@ def __lldb_init_module(debugger, dict):
     debugger.HandleCommand('command script add -f lldbutils.insert_data insert_data')
 
     # allows to print quite long string values
-    debugger.HandleCommand('settings set target.max-string-summary-length 5')
+    debugger.HandleCommand('settings set target.max-string-summary-length 100000')
