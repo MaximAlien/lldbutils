@@ -40,10 +40,10 @@ def insert_data(debugger, command, result, dict):
     # fill in fields with firstname and lastname
     
     # Objective-C expression
-    cmd = 'expr (void) [TestClass handleFirstname:@"' + firstname + '"' + ' lastname:@"' + lastname + '"]'
+    # cmd = 'expr (void) [TestClass handleFirstname:@"' + firstname + '"' + ' lastname:@"' + lastname + '"]'
     
     # C++/JNI expression
-    # cmd = 'expr (void) TestClass::handleName' + '(' + '"' + firstname + '",' + '"' + lastname + '"' + ')'
+    cmd = 'expr (void) TestClass::handleName("' + firstname + '","' + lastname + '")'
     
     print cmd
 
