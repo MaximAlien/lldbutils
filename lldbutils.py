@@ -8,16 +8,16 @@ import shlex
 
 def handle_options():
     usage = "Usage: %command [options]"
-    description = 'This command uses two parameters: firstname and lastname.'
-    parser = optparse.OptionParser(description=description, prog='insert_data', usage=usage)
-    parser.add_option('-f', '--firstname', type='string', dest='firstname', help='Firstname.')
-    parser.add_option('-l', '--lastname', type='string', dest='lastname', help='Lastname.')
+    description = "This command uses two parameters: firstname and lastname."
+    parser = optparse.OptionParser(description=description, prog="insert_data", usage=usage)
+    parser.add_option("-f", "--firstname", type="string", dest="firstname", help="Firstname.")
+    parser.add_option("-l", "--lastname", type="string", dest="lastname", help="Lastname.")
 
     return parser
 
 def insert_data(debugger, command, result, dict):
-    firstname = 'John'
-    lastname = 'Smith'
+    firstname = "John"
+    lastname = "Smith"
 
     command_args = shlex.split(command)
     parser = handle_options()
@@ -26,16 +26,16 @@ def insert_data(debugger, command, result, dict):
     try:
         (options, args) = parser.parse_args(command_args)
     except:
-        result.SetError('Options parsing failed.')
+        result.SetError("Options parsing failed.")
         return
 
     if options.firstname:
         firstname = options.firstname
-        print 'Firstname is: ' + firstname
+        print("Firstname is: " + firstname)
 
     if options.lastname:
         lastname = options.lastname
-        print 'Lastname is: ' + lastname
+        print("Lastname is: " + lastname)
 
     # fill in fields with firstname and lastname
     
@@ -45,15 +45,15 @@ def insert_data(debugger, command, result, dict):
     # C++/JNI expression
     cmd = 'expr (void) TestClass::handleName("' + firstname + '","' + lastname + '")'
     
-    print cmd
+    print(cmd)
 
     res = lldb.SBCommandReturnObject()
     lldb.debugger.GetCommandInterpreter().HandleCommand(cmd, res)
 
     # handle error if any
     if not res.Succeeded():
-        print 'Error: Cannot execute command.'
-        print res
+        print("Error: Cannot execute command.")
+        print(res)
         return
 
     # continue process execution
@@ -64,7 +64,7 @@ def insert_data(debugger, command, result, dict):
 
 def __lldb_init_module(debugger, dict):
     # inject insert_data to be used during lldb session
-    debugger.HandleCommand('command script add -f lldbutils.insert_data insert_data')
+    debugger.HandleCommand("command script add -f lldbutils.insert_data insert_data")
 
     # allows to print quite long string values
-    debugger.HandleCommand('settings set target.max-string-summary-length 100000')
+    debugger.HandleCommand("settings set target.max-string-summary-length 100000")

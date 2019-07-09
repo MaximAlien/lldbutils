@@ -1,2 +1,2 @@
 # lldbutils
-Set of usability methods for lldb
+Set of usability methods for LLDB.
